@@ -1,5 +1,5 @@
 <----------------------------------------------------------------------01/09/2024-------------------------------------------------------------------------------->
-53. Maximum Subarray on leetcode(Using Kadane's algo):
+                                                  53. Maximum Subarray on leetcode(Using Kadane's algo):
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
@@ -22,7 +22,7 @@ public:
     }
 };
 <----------------------------------------------------------------------02/09/2024-------------------------------------------------------------------------------->
-11. Container With Most Water
+                                                              11. Container With Most Water
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -48,3 +48,32 @@ public:
     }
 };
 <----------------------------------------------------------------------03/09/2024-------------------------------------------------------------------------------->
+                                                                   202. Happy Number
+First solution with Flyod's cycle detection algo:                         |  Second solution:
+class Solution {                                                          |  class Solution {
+public:                                                                   |  public:
+    int sumD(int n) {                                                     |        bool isHappy(int n) {
+        int s=0;                                                          |                int s=0;
+        while(n!=0) {                                                     |                if(n==1)
+            int r= n%10;                                                  |                return true;
+            s += r*r;                                                     |                if(n<7&&n!=1)
+            n = n/10;                                                     |                return false;
+        }                                                                 |                while(n>0) {
+        return s;                                                         |                     int r=n%10;
+    }                                                                     |                     s+=r*r;
+    bool isHappy(int n) {                                                 |                     n=n/10;
+            int slow = sumD(n);                                           |                 }
+            int fast = sumD(sumD(n));                                     |               return isHappy(s);    
+            while(slow!=fast && fast!=1) {                                |             }
+                slow = sumD(slow);                                        |         };
+                fast = sumD(sumD(fast));                                  |
+            }                                                             |
+            if(fast==1) {                                                 |
+                return true;                                              |
+            }                                                             |
+            else {                                                        |
+               return false;                                              |
+            }                                                             |
+        }                                                                 |               
+    }                                                                     |
+};                                                                        |
