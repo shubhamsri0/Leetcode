@@ -268,3 +268,59 @@ public:
     }
 };
 <----------------------------------------------------------------------11/09/2024-------------------------------------------------------------------------------->
+                                                                  198. House Robber
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int sum_even=0,sum_odd=0;
+        for(int i=0;i<nums.size();i++) {
+            if(i%2==0 || i==0) {
+                sum_even+=nums[i];
+                if(sum_even<sum_odd) {
+                    sum_even=sum_odd;
+                }
+            }
+            else {
+                sum_odd+=nums[i];
+                if(sum_even>sum_odd) {
+                    sum_odd=sum_even;
+                }
+            }
+        }
+        if(sum_even>sum_odd) {
+            return sum_even;
+        }
+        else {
+            return sum_odd;
+        }
+    }
+};
+<----------------------------------------------------------------------12/09/2024-------------------------------------------------------------------------------->
+                                                            2028. Find Missing Observations
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+        int sum=0,count=0;
+        vector<int>ans(n);
+        for(int i=0;i<rolls.size();i++) {
+            sum+=rolls[i];
+        }
+        int or_sum=(rolls.size()+n)*mean;
+        int diff=or_sum-sum;
+
+        if(diff<n || diff>6*n) {
+            return {};
+        }
+        int b=diff/n;
+        int r=diff%n;
+
+        for(int i=0;i<n;i++){
+            ans[i]=b;
+            if(r>i) {
+                ans[i]+=1;
+            }
+        }
+        return ans;
+    } 
+}; 
+<----------------------------------------------------------------------13/09/2024-------------------------------------------------------------------------------->
