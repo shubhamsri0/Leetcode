@@ -493,6 +493,89 @@ public:
 <----------------------------------------------------------------------19/09/2024-------------------------------------------------------------------------------->
 
 <----------------------------------------------------------------------20/09/2024-------------------------------------------------------------------------------->
+                                                               260. Single Number III
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        vector<int>result;
+        for(auto i:nums) {
+            mp[i]++;
+        }  
+        for(auto j:mp) {
+            if(j.second==1) {
+                result.push_back(j.first);
+            }
+        }
+        return result;
+        //------------------->2nd<-------------------//
 
+    }
+};
+                                                        2130. Maximum Twin Sum of a Linked List
+
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        // vector<int>list;
+        // ListNode* curr=head;
+        // while(curr!=NULL) {
+        //     list.push_back(curr->val);
+        //     curr=curr->next;
+        // }
+        // int result=0,i=0;
+        // int l=list.size()-1;
+        // while(i<l) {
+            
+        //     result=max(result,list[i]+list[l]);
+        //     i++,l--;
+        // }
+        // return result;
+
+        //------------------------>2nd approach------------------------->
+
+        // stack<int>st;
+        // ListNode* curr=head;
+        // while(curr!=nullptr) {
+        //     st.push(curr->val);
+        //     curr=curr->next;
+        // }
+        // int n=st.size();
+        // int count=1,result=0;
+        // ListNode* temp=head;
+        // while(count<=n/2) {
+        //     result=max(result,temp->val + st.top());
+        //     st.pop();
+        //     temp=temp->next;
+        //     count++;
+        // }
+        // return result;
+
+        //------------------------->3rd Approach---------------------------->
+
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL) {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* prev=NULL;
+        ListNode* curr=slow;
+        while(curr!=NULL) {
+            ListNode* nxt=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }        
+
+        int result=0;
+        while(prev!=NULL) {
+            result=max(result,head->val+prev->val);
+            head=head->next;
+            prev=prev->next;
+        }
+        return result;
+    }
+};
 <----------------------------------------------------------------------21/09/2024-------------------------------------------------------------------------------->
 
