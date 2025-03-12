@@ -14,7 +14,7 @@ public:
         return max(posCount,negCount);
     }
 
-    int binarySearch(vector<int>& nums, int target) {
+    int binarySearch(vector<int>& nums, int target) {    // T.C = O(log(n))
         int left=0, right=nums.size()-1, result=nums.size();
 
         while(left<=right) {
